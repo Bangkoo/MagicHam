@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Panel = this.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+        Panel = this.transform.GetChild(0).GetChild(0).GetComponent<Image>(); //fade에 사용할 검은 화면
     }
     // Start is called before the first frame update
     void Start()

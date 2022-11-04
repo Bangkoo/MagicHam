@@ -1,25 +1,31 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private CharacterMovement movement;
-    float horizontalMove;
-    float verticalMove;
-    bool isAction = false;
+
+    public KeyCode jump;
+    public KeyCode attack;
+    public string moveH;
+    public string moveV;
+
+    bool pause = false;
 
     void Awake()
     {
         movement = GetComponent<CharacterMovement>();
+        moveH = "none";
+        moveV = "none";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt) && !isAction) //점프
+        if (Input.GetKeyDown(jump) && !pause) //점프
         {
             movement.Jump();
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl)) //공격
+        if (Input.GetKeyDown(attack)) //공격
         {
             movement.Attack();
         }
@@ -27,6 +33,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        movement.Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); //이동
+        movement.Move(Input.GetAxisRaw(moveH), Input.GetAxisRaw(moveV)); //이동
     }
 }
