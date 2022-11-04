@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -18,11 +18,11 @@ public class CharacterMovement : MonoBehaviour
         spr = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
     }
 
-    public void Move(float hMove, float vMove)//ÀÌµ¿
+    public void Move(float hMove, float vMove)//ì´ë™
     {
         this.transform.Translate(hMove * Time.deltaTime * hSpeed, vMove * Time.deltaTime * vSpeed, 0);
 
-        if (hMove > 0 && !facingRight) //ÁÂ¿ì ¹İÀü
+        if (hMove > 0 && !facingRight) //ì¢Œìš° ë°˜ì „
         {
             facingRight = !facingRight;
             spr.flipX = facingRight;
@@ -33,7 +33,7 @@ public class CharacterMovement : MonoBehaviour
             spr.flipX = facingRight;
         }
 
-        if(Mathf.Abs(hMove) + Mathf.Abs(vMove) != 0) //ÀÌµ¿ Ã¼Å©
+        if(Mathf.Abs(hMove) + Mathf.Abs(vMove) != 0) //ì´ë™ ì²´í¬
         {
             anim.Moving();
         }
@@ -59,20 +59,20 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    IEnumerator Jumping() //Á¡ÇÁ Ã³¸®
+    IEnumerator Jumping() //ì í”„ ì²˜ë¦¬
     {
         isJumping = true;
         anim.Jump();
-        yield return new WaitForSeconds(1.2f); //¾Ö´Ï¸ŞÀÌ¼Ç ±æÀÌ
+        yield return new WaitForSeconds(1.2f); //ì• ë‹ˆë©”ì´ì…˜ ê¸¸ì´
         anim.EndJump();
         isJumping = false;
     }
 
-    IEnumerator Attacking() //°ø°İ Ã³¸®
+    IEnumerator Attacking() //ê³µê²© ì²˜ë¦¬
     {
         isAttacking = true;
         anim.Attack();
-        yield return new WaitForSeconds(0.25f); //¾Ö´Ï¸ŞÀÌ¼Ç ±æÀÌ
+        yield return new WaitForSeconds(0.25f); //ì• ë‹ˆë©”ì´ì…˜ ê¸¸ì´
         anim.EndAttack();
         isAttacking = false;
     }

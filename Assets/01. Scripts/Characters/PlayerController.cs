@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,11 +15,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftAlt) && !isAction) //¡°«¡
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && !isAction) //Ï†êÌîÑ
         {
             movement.Jump();
         }
-        if (Input.GetKeyDown(KeyCode.LeftControl)) //∞¯∞›
+        if (Input.GetKeyDown(KeyCode.LeftControl)) //Í≥µÍ≤©
         {
             movement.Attack();
         }
@@ -27,6 +27,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        movement.Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); //¿Ãµø
+        movement.Move(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); //Ïù¥Îèô
     }
 }

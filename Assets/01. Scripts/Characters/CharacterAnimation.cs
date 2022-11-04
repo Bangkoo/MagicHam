@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,11 +13,11 @@ public class CharacterAnimation : MonoBehaviour
         sprPos = this.transform.GetChild(0).gameObject.GetComponent<Transform>();
     }
 
-    public void Jump() //Á¡ÇÁ
+    public void Jump() //ì í”„
     {
         animator.SetBool("IsJumping", true);
     }
-    public void EndJump() //Á¡ÇÁ ÈÄ ÂøÁö
+    public void EndJump() //ì í”„ í›„ ì°©ì§€
     {
         animator.SetBool("IsJumping", false);
     }
