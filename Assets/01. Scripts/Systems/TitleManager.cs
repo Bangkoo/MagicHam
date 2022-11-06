@@ -12,6 +12,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Canvas title;
     [SerializeField] private Canvas background;
     [SerializeField] private Canvas menu;
+    public GameObject miniTitle;
 
     float time;
     float F_time = 1.0f;
@@ -44,6 +45,7 @@ public class TitleManager : MonoBehaviour
             CancelInvoke();
             audioSource.Play();
             canPressR = false;
+            miniTitle.gameObject.SetActive(true);
             title.gameObject.SetActive(false);
             menu.gameObject.SetActive(true);
         }
@@ -54,7 +56,7 @@ public class TitleManager : MonoBehaviour
         StartCoroutine(MainFlow());
     }
 
-    IEnumerator MainFlow() //∑Œ∞Ì »ƒ ≈∏¿Ã∆≤
+    IEnumerator MainFlow() //Î°úÍ≥† ÌõÑ ÌÉÄÏù¥ÌãÄ
     {
         logo.gameObject.SetActive(true);
         time = 0.0f;
@@ -85,5 +87,10 @@ public class TitleManager : MonoBehaviour
         flash = flash ? false : true;
         title.transform.GetChild(2).gameObject.SetActive(flash);
         Invoke("PressRFlash", 0.5f);
+    }
+
+    public void test()
+    {
+        Debug.Log("Íµ≥");
     }
 }
