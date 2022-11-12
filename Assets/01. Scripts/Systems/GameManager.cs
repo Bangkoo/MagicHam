@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Panel = this.transform.GetChild(0).GetChild(0).GetComponent<Image>(); //fade에 사용할 검은 화면
+        Panel = this.transform.GetChild(0).GetChild(0).GetComponent<Image>();
     }
     // Start is called before the first frame update
     void Start()
@@ -34,6 +34,23 @@ public class GameManager : MonoBehaviour
     public void FadeOut()
     {
         StartCoroutine(FadeFlowOut());
+    }
+    public void QuickFadeOut()
+    {
+        alpha = Panel.color;
+        alpha.a = 0.0f;
+        Panel.color = alpha;
+        Panel.gameObject.SetActive(false);
+    }
+    public void NextStage()
+    {
+        FadeIn();
+        Invoke("goNextScene", 2.0f);
+    }
+
+    private void goNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
     }
 
     IEnumerator FadeFlowIn()
@@ -64,4 +81,5 @@ public class GameManager : MonoBehaviour
         Panel.gameObject.SetActive(false);
         yield return null;
     }
+
 }

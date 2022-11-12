@@ -11,8 +11,12 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Image logo;
     [SerializeField] private Canvas title;
     [SerializeField] private Canvas background;
+    //
     [SerializeField] private Canvas menu;
-    public GameObject miniTitle;
+    [SerializeField] private Canvas subMenu;
+    [SerializeField] private AudioSource bgm;
+    [SerializeField] private Canvas background2;
+    float vol;
 
     float time;
     float F_time = 1.0f;
@@ -20,6 +24,7 @@ public class TitleManager : MonoBehaviour
 
     bool flash = true;
     bool canPressR = false;
+    bool canPressEsc = false;
 
     void Awake()
     {
@@ -40,14 +45,17 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R) && canPressR)
+        if(Input.GetKeyDown(KeyCode.R) && canPressR) //
         {
-            CancelInvoke();
             audioSource.Play();
+            CancelInvoke();
             canPressR = false;
-            miniTitle.gameObject.SetActive(true);
-            title.gameObject.SetActive(false);
-            menu.gameObject.SetActive(true);
+            StartCoroutine(AfterPressR());
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && canPressEsc)
+        {
+            goMainMenu();
         }
     }
 
@@ -56,13 +64,22 @@ public class TitleManager : MonoBehaviour
         StartCoroutine(MainFlow());
     }
 
-    IEnumerator MainFlow() //로고 후 타이틀
-    {
-        logo.gameObject.SetActive(true);
+    IEnumerator MainFlow() { 
         time = 0.0f;
         alpha = logo.color;
 
         yield return new WaitForSeconds(1.0f);
+        logo.gameObject.SetActive(true);
+        while (alpha.a < 1.0f)
+        {
+            time += (Time.deltaTime / F_time);
+            alpha.a = Mathf.Lerp(0, 1, time);
+            logo.color = alpha;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1.5f);
+        time = 0.0f;
 
         while (alpha.a > 0.0f)
         {
@@ -71,26 +88,96 @@ public class TitleManager : MonoBehaviour
             logo.color = alpha;
             yield return null;
         }
+        yield return new WaitForSeconds(0.5f);
+
         logo.gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(2.0f);
-
         gameManager.SendMessage("FadeOut");
         title.gameObject.SetActive(true);
         background.gameObject.SetActive(true);
-        canPressR = true;
-        Invoke("PressRFlash", 0.5f);
+        bgm.Play();
+        Invoke("PressRFlash", 1.0f);
+    }
+
+    IEnumerator AfterPressR()
+    {
+        gameManager.SendMessage("FadeIn");
+        vol = bgm.volume;
+        time = 0.0f;
+
+        while (vol > 0.0f)
+        {
+            time += Time.deltaTime / F_time;
+            vol = Mathf.Lerp(1, 0, time);
+            bgm.volume = vol;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(2.0f);
+
+        title.gameObject.SetActive(false);
+        menu.gameObject.SetActive(true);
+        background2.gameObject.SetActive(true);
+        canPressEsc = true;
+        gameManager.SendMessage("QuickFadeOut");
     }
 
     void PressRFlash()
     {
         flash = flash ? false : true;
+        canPressR = true;
         title.transform.GetChild(2).gameObject.SetActive(flash);
         Invoke("PressRFlash", 0.5f);
     }
 
-    public void test()
+    ///button event
+    public void goMainMenu()
     {
-        Debug.Log("굳");
+        subMenu.gameObject.SetActive(false);
+        menu.gameObject.SetActive(true);
     }
+    public void goSubMenu()
+    {
+        menu.gameObject.SetActive(false);
+        subMenu.gameObject.SetActive(true);
+    }
+    public void goSetting()
+    {
+        menu.gameObject.SetActive(false);
+    }
+    public void goCredit()
+    {
+        menu.gameObject.SetActive(false);
+    }
+    public void gameExit()
+    {
+        gameManager.SendMessage("FadeIn");
+        StartCoroutine(End());
+    }
+    public void player1()
+    {
+        gameManager.SendMessage("NextStage");
+    }
+    public void player2()
+    {
+        gameManager.SendMessage("NextStage");
+    }
+    //
+    IEnumerator End()
+    {
+        gameManager.SendMessage("FadeIn");
+        vol = bgm.volume;
+        time = 0.0f;
+
+        while (vol > 0.0f)
+        {
+            time += Time.deltaTime / F_time;
+            vol = Mathf.Lerp(1, 0, time);
+            bgm.volume = vol;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(2.0f);
+        Application.Quit();
+    }
+
 }

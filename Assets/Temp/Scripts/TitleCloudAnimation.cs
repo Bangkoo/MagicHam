@@ -19,7 +19,7 @@ public class TitleCloudAnimation : MonoBehaviour
 
         if(rect.anchoredPosition.x > 800.0f)
         {
-            rect.anchoredPosition = new Vector2(-800.0f, 0);
+            rect.anchoredPosition = new Vector2(-800.0f, rect.anchoredPosition.y);
         }
     }
 }
