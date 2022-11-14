@@ -155,10 +155,12 @@ public class TitleManager : MonoBehaviour
     }
     public void player1()
     {
+        gameManager.GetComponent<GameData>().players = 1;
         gameManager.SendMessage("NextStage");
     }
     public void player2()
     {
+        gameManager.GetComponent<GameData>().players = 2;
         gameManager.SendMessage("NextStage");
     }
     //
