@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public string moveH;
     public string moveV;
 
-    bool pause = false;
+    public bool pause = false;
 
     void Awake()
     {
@@ -21,11 +21,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(jump) && !pause) //점프
+        if (Input.GetKeyDown(jump) && !pause) 
         {
             movement.Jump();
         }
-        if (Input.GetKeyDown(attack)) //공격
+        if (Input.GetKeyDown(attack) && !pause)
         {
             movement.Attack();
         }
@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        movement.Move(Input.GetAxisRaw(moveH), Input.GetAxisRaw(moveV)); //이동
+        if (!pause)
+        {
+            movement.Move(Input.GetAxisRaw(moveH), Input.GetAxisRaw(moveV));
+        }
     }
 }

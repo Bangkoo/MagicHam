@@ -15,6 +15,7 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private Canvas menu;
     [SerializeField] private Canvas subMenu;
     [SerializeField] private AudioSource bgm;
+    [SerializeField] private AudioClip[] bgmList;
     [SerializeField] private Canvas background2;
     float vol;
 
@@ -119,6 +120,9 @@ public class TitleManager : MonoBehaviour
         background2.gameObject.SetActive(true);
         canPressEsc = true;
         gameManager.SendMessage("QuickFadeOut");
+        bgm.clip = bgmList[1];
+        bgm.volume = 1.0f;
+        bgm.Play();
     }
 
     void PressRFlash()

@@ -44,7 +44,8 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         FadeIn();
-        Invoke("goNextScene", 2.0f);
+        Invoke("goNextScene", 3.0f);
+        Invoke("FadeOut", 3.0f);
     }
 
     private void goNextScene()

@@ -751,6 +751,9 @@ MonoBehaviour:
   menu: {fileID: 0}
   subMenu: {fileID: 183143799}
   bgm: {fileID: 1219624231}
+  bgmList:
+  - {fileID: 8300000, guid: c0c00e1b3f8ea08498eb1a70776e1f2c, type: 3}
+  - {fileID: 8300000, guid: 69ad990a557227345a3594bbedbe80e6, type: 3}
   background2: {fileID: 1992887028}
 --- !u!4 &293743673
 Transform:
@@ -2121,7 +2124,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9d8f2372cf0f9034abf42564831caac8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c0c00e1b3f8ea08498eb1a70776e1f2c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/06. Scenes/02. SelectCharacter.unity
     guid: f6c3607c0ada88242997c6152fae560e
+  - enabled: 1
+    path: Assets/06. Scenes/02_1. Webtoon1.unity
+    guid: d24f8967ad4ec474a9dda8c385b66e97
+  - enabled: 1
+    path: Assets/06. Scenes/test 1.unity
+    guid: 7279db39bca98d74dbd2f580c773c9ea
+  - enabled: 1
+    path: Assets/06. Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
