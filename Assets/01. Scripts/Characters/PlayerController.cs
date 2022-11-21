@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public string moveH;
     public string moveV;
 
-    public bool pause = false;
+    public bool pause = true;
 
     void Awake()
     {

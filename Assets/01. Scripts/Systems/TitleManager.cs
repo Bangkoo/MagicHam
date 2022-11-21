@@ -17,6 +17,9 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private AudioSource bgm;
     [SerializeField] private AudioClip[] bgmList;
     [SerializeField] private Canvas background2;
+    [SerializeField] private Canvas credit;
+    [SerializeField] private Canvas option;
+    public Slider slider;
     float vol;
 
     float time;
@@ -133,10 +136,23 @@ public class TitleManager : MonoBehaviour
         Invoke("PressRFlash", 0.5f);
     }
 
+    public void valueUpdate(float value)
+    {
+        bgm.volume = value;
+    }
+    public void valueUpdate2(float value)
+    {
+        menu.GetComponent<AudioSource>().volume = value;
+        subMenu.GetComponent<AudioSource>().volume = value;
+        this.GetComponent<AudioSource>().volume = value;
+    }
+
     ///button event
     public void goMainMenu()
     {
         subMenu.gameObject.SetActive(false);
+        credit.gameObject.SetActive(false);
+        option.gameObject.SetActive(false);
         menu.gameObject.SetActive(true);
     }
     public void goSubMenu()
@@ -146,11 +162,13 @@ public class TitleManager : MonoBehaviour
     }
     public void goSetting()
     {
+        option.gameObject.SetActive(true);
         menu.gameObject.SetActive(false);
     }
     public void goCredit()
     {
         menu.gameObject.SetActive(false);
+        credit.gameObject.SetActive(true);
     }
     public void gameExit()
     {

@@ -13,11 +13,13 @@ public class CharacterSelect : MonoBehaviour
     public Sprite twoPCursor;
     public GameObject character;
     public SelectManager sel;
+    public CameraController cam;
 
     // Start is called before the first frame update
     void Start()
     {
         audio = this.GetComponent<AudioSource>();
+        cam = GameObject.Find("Main Camera").GetComponent<CameraController>();
     }
 
     // Update is called once per frame
@@ -47,6 +49,11 @@ public class CharacterSelect : MonoBehaviour
             character.AddComponent<Player1KeySetting>();
             character.SetActive(true);
             sel.count++;
+            cam.player1 = character;
+            if(sel.players == 1)
+            {
+                cam.player2 = character;
+            }
             sel.GetComponent<AudioSource>().Play();
             this.gameObject.SetActive(false);
         }
@@ -55,6 +62,7 @@ public class CharacterSelect : MonoBehaviour
             character.AddComponent<Player2KeySetting>();
             character.SetActive(true);
             sel.count++;
+            cam.player2 = character;
             sel.GetComponent<AudioSource>().Play();
             this.gameObject.SetActive(false);
         }

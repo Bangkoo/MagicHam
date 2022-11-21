@@ -194,6 +194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 0}
+  jump: 0
+  attack: 0
+  moveH: 
+  moveV: 
+  pause: 1
 --- !u!114 &109866865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,6 +1098,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 0}
+  jump: 0
+  attack: 0
+  moveH: 
+  moveV: 
+  pause: 1
 --- !u!50 &2104687852
 Rigidbody2D:
   serializedVersion: 4
