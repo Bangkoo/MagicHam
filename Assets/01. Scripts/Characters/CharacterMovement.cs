@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,6 +6,7 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private CharacterAnimation anim;
     [SerializeField] private SpriteRenderer spr;
+    [SerializeField] private PlayerController p;
     public float hSpeed = 3.5f;
     public float vSpeed = 2.1f;
     bool facingRight = true;
@@ -16,6 +17,7 @@ public class CharacterMovement : MonoBehaviour
     {
         anim = GetComponent<CharacterAnimation>();
         spr = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        p = GetComponent<PlayerController>();     
     }
 
     public void Move(float hMove, float vMove)//이동
@@ -71,9 +73,11 @@ public class CharacterMovement : MonoBehaviour
     IEnumerator Attacking() //공격 처리
     {
         isAttacking = true;
+        p.pause = true;
         anim.Attack();
         yield return new WaitForSeconds(0.25f); //애니메이션 길이
         anim.EndAttack();
         isAttacking = false;
+        p.pause = false;
     }
 }
